@@ -1,12 +1,5 @@
+import { Flower } from "../../../types";
 import { apiFlowers } from "../config";
-
-type Flower = {
-  name: string;
-  latin_name: string;
-  description: string;
-  features: string;
-  profile_picture: HTMLImageElement;
-};
 
 export const getListOfRandomFlowers = () =>
   apiFlowers({ url: "random" }).then((res) => console.log(res));
