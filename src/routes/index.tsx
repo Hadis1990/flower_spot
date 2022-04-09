@@ -1,4 +1,10 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-export default () => <Routes></Routes>;
+import { Home } from "../screens";
+
+export default () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+  </Routes>
+);

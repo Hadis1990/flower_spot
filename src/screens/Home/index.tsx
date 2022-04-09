@@ -1,3 +1,9 @@
 import React from "react";
 
-export default () => <h1>Home</h1>;
+import { Wallpaper } from "../../components";
+
+export default () => (
+  <div>
+    <Wallpaper />
+  </div>
+);
