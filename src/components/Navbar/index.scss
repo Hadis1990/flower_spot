@@ -6,11 +6,20 @@
 
   a {
     text-decoration: none;
-    color: #ff9999;
+  }
+
+  .logo {
+    width: 1.1em;
+    vertical-align: top;
+    margin-right: 0.3em;
   }
 
   .section-1 {
     width: 20%;
+
+    a {
+      font-weight: 600;
+    }
   }
 
   .section-2 {
@@ -19,6 +28,12 @@
 
     a:not(:last-child) {
       margin-right: 1em;
+    }
+
+    a:last-child {
+      background-color: #ff9999;
+      padding: 0.3em 0.7em;
+      border-radius: 1em;
     }
   }
 }
