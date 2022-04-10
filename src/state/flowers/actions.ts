@@ -12,7 +12,9 @@ export const getListOfRandomFlowers = createAsyncThunk<
   try {
     const response = await flowersApi.getListOfRandomFlowers();
     return response.data.flowers;
-  } catch (error) {
-    return thunkApi.rejectWithValue("Could not load images...");
+  } catch (error: any) {
+    return thunkApi.rejectWithValue(
+      error?.response?.data?.error || "Something went wrong..."
+    );
   }
 });

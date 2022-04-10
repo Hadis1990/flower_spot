@@ -4,34 +4,42 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import * as Yup from "yup";
 
+import { registerUser } from "../../../state/users/actions";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
 
 type FormValues = {
-  firstName: string;
-  lastName: string;
-  birthday: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
+  date_of_birth?: Date;
 };
 
 const initialValues = {
-  firstName: "",
-  lastName: "",
-  birthday: "",
+  first_name: "",
+  last_name: "",
   email: "",
   password: "",
 };
 
 const RegisterSchema = Yup.object().shape({
-  firstName: Yup.string().max(50, "Too Long!").required("Required!"),
-  lastName: Yup.string().max(50, "Too Long!").required("Required!"),
+  first_name: Yup.string().max(50, "Too Long!").required("Required!"),
+  last_name: Yup.string().max(50, "Too Long!").required("Required!"),
   email: Yup.string().email("Invalid Email").required("Required!"),
-  password: Yup.string().min(3, "Too Short for Password").required("Required!"),
+  password: Yup.string().min(6, "Too Short for Password").required("Required!"),
 });
 
 export default () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const dispatch = useAppDispatch();
+  const error = useAppSelector((state) => state.usersReducer.error);
+  const loading = useAppSelector((state) => state.usersReducer.loading);
+
+  const [birthDay, setbirthDay] = useState<Date>();
+
+  console.log("register component", error);
 
   return (
     <div id="register-form-container">
@@ -46,38 +54,39 @@ export default () => {
           values: FormValues,
           { setSubmitting }: FormikHelpers<FormValues>
         ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+          dispatch(registerUser({ ...values, date_of_birth: birthDay }));
         }}
       >
         {({ errors, touched }) => (
           <Form id="register-form">
             <div className="input-fields-container">
-              <label htmlFor="firstName">First Name</label>
-              <Field id="firstName" name="firstName" className="input-fields" />
-              {errors.firstName && touched.firstName ? (
-                <div>{errors.firstName}</div>
-              ) : null}
-            </div>
-
-            <div className="input-fields-container">
-              <label htmlFor="lastName">Last Name</label>
-              <Field id="lastName" name="lastName" className="input-fields" />
-              {errors.lastName && touched.lastName ? (
-                <div>{errors.lastName}</div>
-              ) : null}
-            </div>
-
-            <div className="input-fields-container">
-              <label htmlFor="dateOfBirth">Date of Birth</label>
-              <DatePicker
-                id="dateOfBirth"
-                name="dateOfBirth"
+              <label htmlFor="first_name">First Name</label>
+              <Field
+                id="first_name"
+                name="first_name"
                 className="input-fields"
-                selected={startDate}
-                onChange={(date: Date) => setStartDate(date)}
+              />
+              {errors.first_name && touched.first_name ? (
+                <div>{errors.first_name}</div>
+              ) : null}
+            </div>
+
+            <div className="input-fields-container">
+              <label htmlFor="last_name">Last Name</label>
+              <Field id="last_name" name="last_name" className="input-fields" />
+              {errors.last_name && touched.last_name ? (
+                <div>{errors.last_name}</div>
+              ) : null}
+            </div>
+
+            <div className="input-fields-container">
+              <label htmlFor="date_of_birth">Date of Birth</label>
+              <DatePicker
+                id="date_of_birth"
+                name="date_of_birth"
+                className="input-fields"
+                selected={birthDay}
+                onChange={(date: Date) => setbirthDay(date)}
               />
             </div>
 
@@ -105,12 +114,17 @@ export default () => {
               ) : null}
             </div>
 
-            <button type="submit" className="submit-button white-font">
+            <button
+              type="submit"
+              className="submit-button white-font"
+              disabled={loading}
+            >
               Create Account
             </button>
           </Form>
         )}
       </Formik>
+      {error && <div className="error">{error}</div>}
     </div>
   );
 };
