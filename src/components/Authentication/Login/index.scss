@@ -1,0 +1,23 @@
+#login-form-container {
+  width: 30%;
+  margin: auto;
+
+  #login-form {
+    width: 100%;
+
+    .input-fields {
+      display: block;
+      width: 99%;
+      margin: 10px auto;
+      padding: 10px 0px;
+    }
+
+    .submit-button {
+      width: 100%;
+      border: none;
+      text-align: center;
+      padding: 10px 0px;
+      background-color: #ecbcb3;
+    }
+  }
+}
