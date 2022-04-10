@@ -14,11 +14,12 @@ export default ({ images }: Props) => (
       <div
         className="img-container"
         style={{ backgroundImage: `url(${img.profile_picture})` }}
+        key={img.id}
       >
-        <div>
+        <div className="img-info">
           <div>{img.name}</div>
           <div>{img.latin_name}</div>
-          <div>{img.sightings}</div>
+          <div className="img-sightings">{img.sightings}</div>
         </div>
       </div>
     ))}

@@ -1,8 +1,38 @@
 #images-grid {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-gap: 10px;
 
-  .img {
-    width: 20%;
+  .img-container {
+    position: relative;
+    height: 350px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .img-info {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+      bottom: 10px;
+      text-align: center;
+      color: #fff;
+
+      .img-sightings {
+        background-color: rgba(234, 167, 158, 0.5);
+        border-radius: 1em;
+        width: 130px;
+      }
+    }
+  }
+
+  .img-container:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
   }
 }
