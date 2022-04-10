@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
+import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import * as Yup from "yup";
 
@@ -34,6 +35,9 @@ export default () => {
 
   return (
     <div id="register-form-container">
+      <div className="close">
+        <Link to="/">&#10006;</Link>
+      </div>
       <h1>Create an Account</h1>
       <Formik
         initialValues={initialValues}

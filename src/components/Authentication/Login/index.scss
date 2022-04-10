@@ -1,12 +1,21 @@
 #login-form-container {
+  position: relative;
   width: 30%;
   margin: auto;
   background-color: #fff;
   padding: 20px;
   font-family: "Ubuntu", sans-serif;
 
-  h1 {
-    text-align: center;
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
   }
 
   #login-form {

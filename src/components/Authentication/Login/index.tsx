@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import DatePicker from "react-datepicker";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,6 +24,9 @@ const LoginSchema = Yup.object().shape({
 export default () => {
   return (
     <div id="login-form-container">
+      <div className="close">
+        <Link to="/">&#10006;</Link>
+      </div>
       <h1>Welcome Back</h1>
       <Formik
         initialValues={initialValues}
