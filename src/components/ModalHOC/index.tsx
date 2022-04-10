@@ -2,8 +2,6 @@ import React from "react";
 
 import "./index.scss";
 
-type Props = {
-  children: React.ReactNode;
-};
+type Props = { component: React.ReactNode };
 
-export default ({ children }: Props) => <div id="modal">{children}</div>;
+export default ({ component }: Props) => <div id="modal">{component}</div>;

@@ -7,22 +7,8 @@ import { Register, Login, ModalHOC } from "../components";
 export default () => (
   <Routes>
     <Route path="/" element={<Home />}>
-      <Route
-        path="/register"
-        element={
-          <ModalHOC>
-            <Register />
-          </ModalHOC>
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <ModalHOC>
-            <Login />
-          </ModalHOC>
-        }
-      />
+      <Route path="/register" element={<ModalHOC component={<Register />} />} />
+      <Route path="/login" element={<ModalHOC component={<Login />} />} />
     </Route>
   </Routes>
 );
