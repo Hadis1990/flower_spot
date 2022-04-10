@@ -8,6 +8,7 @@ export default () => (
   <div
     style={{ backgroundImage: `url(${wallpaperImg})` }}
     id="wallpaper-container"
+    className="montserrat-font-family"
   >
     <div>
       <h1 className="white-font">Discover flowers around you</h1>

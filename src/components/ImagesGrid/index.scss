@@ -1,7 +1,9 @@
 #images-grid {
   display: grid;
   grid-template-columns: repeat(5, 20%);
-  grid-gap: 10px;
+  grid-gap: 3px;
+  background-color: #f2f2f2;
+  margin-bottom: 3px;
 
   .img-container {
     position: relative;
@@ -22,6 +24,7 @@
         background-color: rgba(234, 167, 158, 0.5);
         border-radius: 1em;
         width: 130px;
+        margin: auto;
       }
     }
   }
@@ -34,5 +37,10 @@
     top: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(1, 99%);
+    margin: 1%;
   }
 }

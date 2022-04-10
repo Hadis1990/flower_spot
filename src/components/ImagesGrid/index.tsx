@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default ({ images }: Props) => (
-  <div id="images-grid">
+  <div id="images-grid" className="ubuntu-font-family">
     {images.map((img) => (
       <div
         className="img-container"

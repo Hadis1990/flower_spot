@@ -20,20 +20,65 @@
     a {
       font-weight: 600;
     }
+
+    @media screen and (max-width: 900px) {
+      display: inline-block;
+      width: 90%;
+    }
   }
 
   .section-2 {
     width: 80%;
     text-align: right;
 
+    #ham-menu {
+      display: none;
+    }
+
     a:not(:last-child) {
       margin-right: 1em;
     }
 
     a:last-child {
-      background-color: #ff9999;
+      background-color: #ecbcb3;
       padding: 0.3em 0.7em;
       border-radius: 1em;
+    }
+
+    @media screen and (max-width: 900px) {
+      display: block;
+      width: 100%;
+      text-align: left;
+
+      .navbar-item {
+        display: block;
+        padding: 10px 0px;
+      }
+
+      a:last-child {
+        background-color: #fff;
+        color: #ecbcb3;
+        border-radius: 0em;
+        padding: 0px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    display: block;
+
+    #ham-menu {
+      display: inline-block;
+      width: 50px;
+      height: auto;
+      cursor: pointer;
+
+      div {
+        height: 3px;
+        width: 80%;
+        margin-bottom: 3px;
+        background-color: #949ea0;
+      }
     }
   }
 }
