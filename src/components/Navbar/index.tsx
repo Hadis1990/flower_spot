@@ -1,26 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { useWindowWidth } from "../../util/hooks";
 
 import navbarLogo from "../../assets/images/cherry-blossom.png";
 
 import "./index.scss";
 
 export default () => {
-  const [openMenu, setOpenMenu] = useState(false);
+  const { windowWidth } = useWindowWidth();
+  const [openMenu, setOpenMenu] = useState(windowWidth > 900);
+
+  useEffect(() => {
+    setOpenMenu(windowWidth > 900);
+  }, [windowWidth]);
 
   return (
     <nav id="main-navbar" className="montserrat-font-family">
       <div className="section-1">
-        <img src={navbarLogo} className="logo" />
-        <Link to="/home" className="pink-font">
-          FlowrSpot
-        </Link>
-      </div>
+        <div>
+          <img src={navbarLogo} className="logo" />
+          <Link to="/home" className="pink-font">
+            FlowrSpot
+          </Link>
+        </div>
 
-      <div id="ham-menu" onClick={() => setOpenMenu((openMenu) => !openMenu)}>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div id="ham-menu" onClick={() => setOpenMenu((openMenu) => !openMenu)}>
+          <div className={`${openMenu ? "close" : ""}`}></div>
+          <div className={`${openMenu ? "close" : ""}`}></div>
+          <div className={`${openMenu ? "close" : ""}`}></div>
+        </div>
       </div>
 
       {openMenu && (

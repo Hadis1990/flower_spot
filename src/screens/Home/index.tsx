@@ -7,11 +7,11 @@ import { getListOfRandomFlowers } from "../../state/flowers/actions";
 export default () => {
   const dispatch = useAppDispatch();
   const flowers = useAppSelector((state) => state.flowersReducer.flowers);
+
   console.log(flowers);
 
   useEffect(() => {
-    dispatch(getListOfRandomFlowers());
-    console.log("hahahaha", flowers);
+    //dispatch(getListOfRandomFlowers());
   }, [dispatch]);
 
   return (
