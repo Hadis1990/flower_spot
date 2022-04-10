@@ -4,7 +4,7 @@ type Payload = {
   [P in keyof UserState]?: UserState[P];
 };
 
-export default {
-  authHandler: (state: UserState, payload: Payload) =>
-    (state = { ...state, ...payload }),
+export const authHandler = (state: UserState, payload: Payload) => {
+  state = { ...state, ...payload };
+  return state;
 };

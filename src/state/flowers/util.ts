@@ -6,7 +6,7 @@ type Payload = {
   [P in keyof FlowersState]?: FlowersState[P];
 };
 
-export default {
-  getRandomFlowersHandler: (state: FlowersState, payload: Payload) =>
-    (state = { ...state, ...payload }),
+export const flowersStateHandler = (state: FlowersState, payload: Payload) => {
+  state = { ...state, ...payload };
+  return state;
 };

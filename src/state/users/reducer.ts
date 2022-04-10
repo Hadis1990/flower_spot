@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { UserInitialState } from "../../types";
 import { registerUser, loginUser } from "./actions";
-import reducerHandlers from "./util";
+import { authHandler } from "./util";
 
 const initialState = {
   authToken: "",
@@ -15,38 +15,30 @@ const usersReducer = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(registerUser.pending, (state) => {
-      reducerHandlers.authHandler(state, { loading: false });
-      return state;
-    });
+    builder.addCase(registerUser.pending, (state) =>
+      authHandler(state, { loading: false })
+    );
 
-    builder.addCase(registerUser.fulfilled, (state, { payload }) => {
-      console.log("register service payload", payload);
-      reducerHandlers.authHandler(state, { authToken: payload });
-      return state;
-    });
+    builder.addCase(registerUser.fulfilled, (state, { payload }) =>
+      authHandler(state, { authToken: payload })
+    );
 
-    builder.addCase(registerUser.rejected, (state, { payload }) => {
-      console.log("rejected", payload);
-      state = reducerHandlers.authHandler(state, { error: payload });
-      console.log("state", state);
-      return state;
-    });
+    builder.addCase(
+      registerUser.rejected,
+      (state, { payload }) => (state = authHandler(state, { error: payload }))
+    );
 
-    builder.addCase(loginUser.pending, (state) => {
-      reducerHandlers.authHandler(state, { loading: false });
-      return state;
-    });
+    builder.addCase(loginUser.pending, (state) =>
+      authHandler(state, { loading: false })
+    );
 
-    builder.addCase(loginUser.fulfilled, (state, { payload }) => {
-      reducerHandlers.authHandler(state, { authToken: payload });
-      return state;
-    });
+    builder.addCase(loginUser.fulfilled, (state, { payload }) =>
+      authHandler(state, { authToken: payload })
+    );
 
-    builder.addCase(loginUser.rejected, (state, { payload }) => {
-      reducerHandlers.authHandler(state, { error: payload });
-      return state;
-    });
+    builder.addCase(loginUser.rejected, (state, { payload }) =>
+      authHandler(state, { error: payload })
+    );
   },
 });
 

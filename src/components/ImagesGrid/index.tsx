@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Flower } from "../../types";
 
 import "./index.scss";

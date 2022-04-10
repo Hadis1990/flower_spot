@@ -1,5 +1,3 @@
-import React from "react";
-
 import wallpaperImg from "../../assets/images/pl-herowallpaper.png";
 
 import "./index.scss";

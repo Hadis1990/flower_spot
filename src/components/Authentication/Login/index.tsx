@@ -1,15 +1,11 @@
-import React, { useState } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
+import { User } from "../../../types";
+
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
-
-type FormValues = {
-  email: string;
-  password: string;
-};
 
 const initialValues = {
   email: "",
@@ -32,8 +28,8 @@ export default () => {
         initialValues={initialValues}
         validationSchema={LoginSchema}
         onSubmit={(
-          values: FormValues,
-          { setSubmitting }: FormikHelpers<FormValues>
+          values: Pick<User, "email" | "password">,
+          { setSubmitting }: FormikHelpers<Pick<User, "email" | "password">>
         ) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));

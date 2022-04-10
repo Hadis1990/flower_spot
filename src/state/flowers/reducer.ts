@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { FlowerInitialState } from "../../types";
 import { getListOfRandomFlowers } from "./actions";
-import reducerHandlers from "./util";
+import { flowersStateHandler } from "./util";
 
 const initialState = {
   flowers: [],
@@ -15,20 +15,17 @@ const flowersReducer = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getListOfRandomFlowers.pending, (state) => {
-      reducerHandlers.getRandomFlowersHandler(state, { loading: false });
-      return state;
-    });
+    builder.addCase(getListOfRandomFlowers.pending, (state) =>
+      flowersStateHandler(state, { loading: false })
+    );
 
-    builder.addCase(getListOfRandomFlowers.fulfilled, (state, { payload }) => {
-      reducerHandlers.getRandomFlowersHandler(state, { flowers: payload });
-      return state;
-    });
+    builder.addCase(getListOfRandomFlowers.fulfilled, (state, { payload }) =>
+      flowersStateHandler(state, { flowers: payload })
+    );
 
-    builder.addCase(getListOfRandomFlowers.rejected, (state, { payload }) => {
-      reducerHandlers.getRandomFlowersHandler(state, { error: payload });
-      return state;
-    });
+    builder.addCase(getListOfRandomFlowers.rejected, (state, { payload }) =>
+      flowersStateHandler(state, { error: payload })
+    );
   },
 });
 

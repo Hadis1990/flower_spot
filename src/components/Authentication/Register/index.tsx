@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -6,17 +6,10 @@ import * as Yup from "yup";
 
 import { registerUser } from "../../../state/users/actions";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { User } from "../../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
-
-type FormValues = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  date_of_birth?: Date;
-};
 
 const initialValues = {
   first_name: "",
@@ -39,8 +32,6 @@ export default () => {
 
   const [birthDay, setbirthDay] = useState<Date>();
 
-  console.log("register component", error);
-
   return (
     <div id="register-form-container">
       <div className="close">
@@ -50,10 +41,7 @@ export default () => {
       <Formik
         initialValues={initialValues}
         validationSchema={RegisterSchema}
-        onSubmit={(
-          values: FormValues,
-          { setSubmitting }: FormikHelpers<FormValues>
-        ) => {
+        onSubmit={(values: User, { setSubmitting }: FormikHelpers<User>) => {
           dispatch(registerUser({ ...values, date_of_birth: birthDay }));
         }}
       >
