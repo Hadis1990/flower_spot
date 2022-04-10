@@ -1,24 +1,22 @@
 import { Flower } from "../../../types";
 import { apiFlowers } from "../config";
 
-export const getListOfRandomFlowers = () =>
-  apiFlowers({ url: "random" }).then((res) => console.log(res));
+export default {
+  getListOfRandomFlowers: () => apiFlowers({ url: "random" }),
 
-export const getListOfFlowers = () =>
-  apiFlowers({ url: "" }).then((res) => console.log(res));
+  getListOfFlowers: () => apiFlowers({ url: "" }),
 
-export const getFlowerSightings = (id: number) =>
-  apiFlowers({ url: `/${id}/sightings` }).then((res) => console.log(res));
+  getFlowerSightings: (id: number) => apiFlowers({ url: `/${id}/sightings` }),
 
-export const getFlowerDetail = (id: number) =>
-  apiFlowers({ url: `/${id}/` }).then((res) => console.log(res));
+  getFlowerDetail: (id: number) => apiFlowers({ url: `/${id}/` }),
 
-export const getFlowersSearch = (query: string) => {
-  const params = new URLSearchParams();
-  params.append("query", query);
+  getFlowersSearch: (query: string) => {
+    const params = new URLSearchParams();
+    params.append("query", query);
 
-  return apiFlowers({ url: "search", params });
+    return apiFlowers({ url: "search", params });
+  },
+
+  addFlower: (flower: Flower) =>
+    apiFlowers({ url: "", method: "POST", data: flower }),
 };
-
-export const addFlower = (flower: Flower) =>
-  apiFlowers({ url: "", method: "POST", data: flower });

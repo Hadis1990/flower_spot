@@ -6,3 +6,9 @@ export type Flower = {
   profile_picture: string;
   favorite: boolean;
 };
+
+export interface FlowerInitialState {
+  flowers: Flower[];
+  loading: boolean;
+  error: string;
+}

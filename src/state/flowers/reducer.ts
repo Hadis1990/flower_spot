@@ -1,11 +1,32 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { Flower } from "../../types";
-
-interface initialState {
-  flowers: Flower[];
-}
+import { FlowerInitialState } from "../../types";
+import { getListOfRandomFlowers } from "./actions";
+import reducerHandlers from "./util";
 
 const initialState = {
   flowers: [],
-};
+  loading: false,
+  error: "",
+} as FlowerInitialState;
+
+const flowersReducer = createSlice({
+  name: "flowers",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getListOfRandomFlowers.pending, (state) => {
+      reducerHandlers.getRandomFlowersHandler(state, { loading: false });
+    });
+
+    builder.addCase(getListOfRandomFlowers.fulfilled, (state, { payload }) =>
+      reducerHandlers.getRandomFlowersHandler(state, { flowers: payload })
+    );
+
+    builder.addCase(getListOfRandomFlowers.rejected, (state, { payload }) => {
+      reducerHandlers.getRandomFlowersHandler(state, { error: payload });
+    });
+  },
+});
+
+export default flowersReducer.reducer;

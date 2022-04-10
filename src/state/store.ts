@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import flowersReducer from "./flowers/reducer";
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    flowersReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
