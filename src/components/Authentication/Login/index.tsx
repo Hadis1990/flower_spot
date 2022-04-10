@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { loginUser } from "../../../state/users/actions";
+import { cleanUp } from "../../../state/users/reducer";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { User } from "../../../types";
 
@@ -30,6 +31,12 @@ export default () => {
   useEffect(() => {
     authToken && navigate("/");
   }, [authToken]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(cleanUp());
+    };
+  }, []);
 
   return (
     <div id="login-form-container">

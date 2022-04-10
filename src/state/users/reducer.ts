@@ -14,7 +14,15 @@ const initialState = {
 const usersReducer = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    cleanUp: (state) =>
+      authHandler(state, {
+        authToken: "",
+        loading: false,
+        registerError: "",
+        loginError: "",
+      }),
+  },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state) =>
       authHandler(state, { loading: false })
@@ -43,5 +51,7 @@ const usersReducer = createSlice({
     );
   },
 });
+
+export const { cleanUp } = usersReducer.actions;
 
 export default usersReducer.reducer;

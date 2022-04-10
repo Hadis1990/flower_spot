@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import * as Yup from "yup";
 
 import { registerUser } from "../../../state/users/actions";
+import { cleanUp } from "../../../state/users/reducer";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { User } from "../../../types";
 
@@ -34,11 +35,17 @@ export default () => {
   const loading = useAppSelector((state) => state.usersReducer.loading);
   const authToken = useAppSelector((state) => state.usersReducer.authToken);
 
+  const [birthDay, setbirthDay] = useState<Date>();
+
   useEffect(() => {
     authToken && navigate("/login");
   }, [authToken]);
 
-  const [birthDay, setbirthDay] = useState<Date>();
+  useEffect(() => {
+    return () => {
+      dispatch(cleanUp());
+    };
+  }, []);
 
   return (
     <div id="register-form-container">
