@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
 import { Wallpaper, ImagesGrid } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
@@ -18,6 +19,7 @@ export default () => {
     <div>
       <Wallpaper />
       <ImagesGrid images={flowers} />
+      <Outlet />
     </div>
   );
 };

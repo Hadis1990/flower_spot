@@ -3,6 +3,7 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import DatePicker from "react-datepicker";
 import * as Yup from "yup";
 
+import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
 
 type FormValues = {
@@ -33,7 +34,7 @@ export default () => {
 
   return (
     <div id="register-form-container">
-      <h1>Create an Account</h1>;
+      <h1>Create an Account</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={RegisterSchema}
@@ -47,50 +48,64 @@ export default () => {
           }, 500);
         }}
       >
-        <Form id="register-form">
-          <label htmlFor="firstName">First Name</label>
-          <Field
-            id="firstName"
-            name="firstName"
-            placeholder="John"
-            className="input-fields"
-          />
+        {({ errors, touched }) => (
+          <Form id="register-form">
+            <div className="input-fields-container">
+              <label htmlFor="firstName">First Name</label>
+              <Field id="firstName" name="firstName" className="input-fields" />
+              {errors.firstName && touched.firstName ? (
+                <div>{errors.firstName}</div>
+              ) : null}
+            </div>
 
-          <label htmlFor="lastName">Last Name</label>
-          <Field
-            id="lastName"
-            name="lastName"
-            placeholder="Doe"
-            className="input-fields"
-          />
+            <div className="input-fields-container">
+              <label htmlFor="lastName">Last Name</label>
+              <Field id="lastName" name="lastName" className="input-fields" />
+              {errors.lastName && touched.lastName ? (
+                <div>{errors.lastName}</div>
+              ) : null}
+            </div>
 
-          <DatePicker
-            selected={startDate}
-            onChange={(date: Date) => setStartDate(date)}
-          />
+            <div className="input-fields-container">
+              <label htmlFor="dateOfBirth">Date of Birth</label>
+              <DatePicker
+                id="dateOfBirth"
+                name="dateOfBirth"
+                className="input-fields"
+                selected={startDate}
+                onChange={(date: Date) => setStartDate(date)}
+              />
+            </div>
 
-          <label htmlFor="email">Email</label>
-          <Field
-            id="email"
-            name="email"
-            placeholder="john@acme.com"
-            type="email"
-            className="input-fields"
-          />
+            <div className="input-fields-container">
+              <label htmlFor="email">Email</label>
+              <Field
+                id="email"
+                name="email"
+                type="email"
+                className="input-fields"
+              />
+              {errors.email && touched.email ? <div>{errors.email}</div> : null}
+            </div>
 
-          <label htmlFor="password">password</label>
-          <Field
-            id="password"
-            name="password"
-            placeholder="john@acme.com"
-            type="password"
-            className="input-fields"
-          />
+            <div className="input-fields-container">
+              <label htmlFor="password">password</label>
+              <Field
+                id="password"
+                name="password"
+                type="password"
+                className="input-fields"
+              />
+              {errors.password && touched.password ? (
+                <div>{errors.password}</div>
+              ) : null}
+            </div>
 
-          <button type="submit" className="submit-button">
-            Create Account
-          </button>
-        </Form>
+            <button type="submit" className="submit-button white-font">
+              Create Account
+            </button>
+          </Form>
+        )}
       </Formik>
     </div>
   );
