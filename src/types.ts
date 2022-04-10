@@ -9,7 +9,8 @@ export type User = {
 export type UserInitialState = {
   authToken: string;
   loading: boolean;
-  error: string | undefined;
+  registerError?: string;
+  loginError?: string;
 };
 
 export type Flower = {

@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
+import { loginUser } from "../../../state/users/actions";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { User } from "../../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,6 +21,16 @@ const LoginSchema = Yup.object().shape({
 });
 
 export default () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const loginError = useAppSelector((state) => state.usersReducer.loginError);
+  const loading = useAppSelector((state) => state.usersReducer.loading);
+  const authToken = useAppSelector((state) => state.usersReducer.authToken);
+
+  useEffect(() => {
+    authToken && navigate("/");
+  }, [authToken]);
+
   return (
     <div id="login-form-container">
       <div className="close">
@@ -31,10 +44,7 @@ export default () => {
           values: Pick<User, "email" | "password">,
           { setSubmitting }: FormikHelpers<Pick<User, "email" | "password">>
         ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+          dispatch(loginUser(values));
         }}
       >
         {({ errors, touched }) => (
@@ -69,6 +79,8 @@ export default () => {
           </Form>
         )}
       </Formik>
+
+      {loginError && <div className="error">{loginError}</div>}
     </div>
   );
 };

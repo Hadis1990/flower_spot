@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import * as Yup from "yup";
 
@@ -27,8 +27,16 @@ const RegisterSchema = Yup.object().shape({
 
 export default () => {
   const dispatch = useAppDispatch();
-  const error = useAppSelector((state) => state.usersReducer.error);
+  const navigate = useNavigate();
+  const registerError = useAppSelector(
+    (state) => state.usersReducer.registerError
+  );
   const loading = useAppSelector((state) => state.usersReducer.loading);
+  const authToken = useAppSelector((state) => state.usersReducer.authToken);
+
+  useEffect(() => {
+    authToken && navigate("/login");
+  }, [authToken]);
 
   const [birthDay, setbirthDay] = useState<Date>();
 
@@ -112,7 +120,7 @@ export default () => {
           </Form>
         )}
       </Formik>
-      {error && <div className="error">{error}</div>}
+      {registerError && <div className="error">{registerError}</div>}
     </div>
   );
 };

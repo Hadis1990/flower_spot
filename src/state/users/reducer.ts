@@ -7,7 +7,8 @@ import { authHandler } from "./util";
 const initialState = {
   authToken: "",
   loading: false,
-  error: "",
+  registerError: "",
+  loginError: "",
 } as UserInitialState;
 
 const usersReducer = createSlice({
@@ -25,7 +26,8 @@ const usersReducer = createSlice({
 
     builder.addCase(
       registerUser.rejected,
-      (state, { payload }) => (state = authHandler(state, { error: payload }))
+      (state, { payload }) =>
+        (state = authHandler(state, { registerError: payload }))
     );
 
     builder.addCase(loginUser.pending, (state) =>
@@ -37,7 +39,7 @@ const usersReducer = createSlice({
     );
 
     builder.addCase(loginUser.rejected, (state, { payload }) =>
-      authHandler(state, { error: payload })
+      authHandler(state, { loginError: payload })
     );
   },
 });
