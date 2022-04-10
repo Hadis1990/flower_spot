@@ -1,0 +1,8 @@
+#images-grid {
+  display: flex;
+  justify-content: space-evenly;
+
+  .img {
+    width: 20%;
+  }
+}
