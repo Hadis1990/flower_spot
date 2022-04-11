@@ -1,0 +1,22 @@
+#congratulations {
+  width: 30%;
+  background-color: #fff;
+  font-family: "Ubuntu", sans-serif;
+
+  h3 {
+    text-align: center;
+  }
+
+  button {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    border: none;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0px;
+    background-color: #ecbcb3;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

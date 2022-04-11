@@ -7,4 +7,6 @@ export default {
 
   loginUser: (user: Pick<User, "email" | "password">) =>
     apiUsers({ url: "login", method: "POST", data: user }),
+
+  getUserDate: (id: number) => apiUsers({ url: `${id}` }),
 };

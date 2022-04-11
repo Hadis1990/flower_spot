@@ -36,7 +36,7 @@ export default () => {
   const [birthDay, setbirthDay] = useState<Date>();
 
   useEffect(() => {
-    authToken && navigate("/login");
+    authToken && navigate("/congratulations");
   }, [authToken]);
 
   useEffect(() => {
