@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import * as Yup from "yup";
 
 import { registerUser } from "../../../state/users/actions";
-import { cleanUp } from "../../../state/users/reducer";
+import { registerCleanUp } from "../../../state/users/reducer";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { User } from "../../../types";
 
@@ -29,11 +29,9 @@ const RegisterSchema = Yup.object().shape({
 export default () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const registerError = useAppSelector(
-    (state) => state.usersReducer.registerError
+  const { error, loading, authToken } = useAppSelector(
+    (state) => state.usersReducer.register
   );
-  const loading = useAppSelector((state) => state.usersReducer.loading);
-  const authToken = useAppSelector((state) => state.usersReducer.authToken);
 
   const [birthDay, setbirthDay] = useState<Date>();
 
@@ -43,7 +41,7 @@ export default () => {
 
   useEffect(() => {
     return () => {
-      dispatch(cleanUp());
+      dispatch(registerCleanUp());
     };
   }, []);
 
@@ -127,7 +125,7 @@ export default () => {
           </Form>
         )}
       </Formik>
-      {registerError && <div className="error">{registerError}</div>}
+      {error && <div className="error">{error}</div>}
     </div>
   );
 };

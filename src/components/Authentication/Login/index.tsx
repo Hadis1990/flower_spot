@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { loginUser } from "../../../state/users/actions";
-import { cleanUp } from "../../../state/users/reducer";
+import { loginCleanUp } from "../../../state/users/reducer";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { User } from "../../../types";
 
@@ -24,9 +24,9 @@ const LoginSchema = Yup.object().shape({
 export default () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const loginError = useAppSelector((state) => state.usersReducer.loginError);
-  const loading = useAppSelector((state) => state.usersReducer.loading);
-  const authToken = useAppSelector((state) => state.usersReducer.authToken);
+  const { error, loading, authToken } = useAppSelector(
+    (state) => state.usersReducer.login
+  );
 
   useEffect(() => {
     authToken && navigate("/");
@@ -34,7 +34,7 @@ export default () => {
 
   useEffect(() => {
     return () => {
-      dispatch(cleanUp());
+      dispatch(loginCleanUp());
     };
   }, []);
 
@@ -80,14 +80,18 @@ export default () => {
               ) : null}
             </div>
 
-            <button type="submit" className="submit-button white-font">
+            <button
+              type="submit"
+              className="submit-button white-font"
+              disabled={loading}
+            >
               Login to your Account
             </button>
           </Form>
         )}
       </Formik>
 
-      {loginError && <div className="error">{loginError}</div>}
+      {error && <div className="error">{error}</div>}
     </div>
   );
 };

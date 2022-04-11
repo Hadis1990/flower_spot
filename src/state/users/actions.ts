@@ -8,7 +8,7 @@ export const registerUser = createAsyncThunk<
   string,
   User,
   { rejectValue: string }
->("users/registerUser", async (user: User, thunkApi) => {
+>("registerUsers/register", async (user: User, thunkApi) => {
   try {
     const response = await usersApi.registerUser(user);
     return response.data.auth_token;
@@ -24,7 +24,7 @@ export const loginUser = createAsyncThunk<
   Pick<User, "email" | "password">,
   { rejectValue: string }
 >(
-  "users/loginUser",
+  "loginUsers/login",
   async (user: Pick<User, "email" | "password">, thunkApi) => {
     try {
       const response = await usersApi.loginUser(user);

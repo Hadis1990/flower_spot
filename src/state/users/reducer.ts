@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
 
 import { UserInitialState } from "../../types";
 import { registerUser, loginUser } from "./actions";
@@ -7,20 +8,17 @@ import { authHandler } from "./util";
 const initialState = {
   authToken: "",
   loading: false,
-  registerError: "",
-  loginError: "",
+  error: "",
 } as UserInitialState;
 
-const usersReducer = createSlice({
-  name: "users",
+const registerReducer = createSlice({
+  name: "registerUsers",
   initialState,
   reducers: {
-    cleanUp: (state) =>
+    registerCleanUp: (state) =>
       authHandler(state, {
-        authToken: "",
         loading: false,
-        registerError: "",
-        loginError: "",
+        error: "",
       }),
   },
   extraReducers: (builder) => {
@@ -34,10 +32,22 @@ const usersReducer = createSlice({
 
     builder.addCase(
       registerUser.rejected,
-      (state, { payload }) =>
-        (state = authHandler(state, { registerError: payload }))
+      (state, { payload }) => (state = authHandler(state, { error: payload }))
     );
+  },
+});
 
+const loginReducer = createSlice({
+  name: "loginUsers",
+  initialState,
+  reducers: {
+    loginCleanUp: (state) =>
+      authHandler(state, {
+        loading: false,
+        error: "",
+      }),
+  },
+  extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state) =>
       authHandler(state, { loading: false })
     );
@@ -47,11 +57,17 @@ const usersReducer = createSlice({
     );
 
     builder.addCase(loginUser.rejected, (state, { payload }) =>
-      authHandler(state, { loginError: payload })
+      authHandler(state, { error: payload })
     );
   },
 });
 
-export const { cleanUp } = usersReducer.actions;
+const usersReducer = combineReducers({
+  register: registerReducer.reducer,
+  login: loginReducer.reducer,
+});
 
-export default usersReducer.reducer;
+export const { registerCleanUp } = registerReducer.actions;
+export const { loginCleanUp } = loginReducer.actions;
+
+export default usersReducer;
