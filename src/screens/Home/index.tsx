@@ -10,7 +10,7 @@ export default () => {
   const flowers = useAppSelector((state) => state.flowersReducer.flowers);
 
   useEffect(() => {
-    //dispatch(getListOfRandomFlowers());
+    dispatch(getListOfRandomFlowers());
   }, [dispatch]);
 
   return (
