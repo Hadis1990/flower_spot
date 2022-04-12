@@ -50,4 +50,8 @@
       color: #949ea0;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    width: 90%;
+  }
 }

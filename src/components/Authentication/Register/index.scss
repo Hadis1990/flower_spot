@@ -60,4 +60,8 @@
     color: red;
     margin-top: 10px;
   }
+
+  @media screen and (max-width: 900px) {
+    width: 90%;
+  }
 }
