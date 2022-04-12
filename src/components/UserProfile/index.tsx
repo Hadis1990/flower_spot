@@ -18,10 +18,7 @@ export default () => {
 
     try {
       helperFunc();
-      console.log(userData);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }, []);
 
   return (

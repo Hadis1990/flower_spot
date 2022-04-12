@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { Home } from "../screens";
@@ -8,6 +9,7 @@ import {
   UserProfile,
   ModalHOC,
 } from "../components";
+import PrivateRoute from "./PrivateRoute";
 
 export default () => (
   <Routes>
@@ -18,10 +20,10 @@ export default () => (
         path="/congratulations"
         element={<ModalHOC component={<Congratulations />} />}
       />
-      <Route
-        path="/user_profile"
-        element={<ModalHOC component={<UserProfile />} />}
-      />
+    </Route>
+
+    <Route path="/user_profile" element={<PrivateRoute />}>
+      <Route path="/user_profile" element={<UserProfile />} />
     </Route>
   </Routes>
 );

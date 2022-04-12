@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 
+import { setAuthToken } from "../../util";
 import { UserInitialState } from "../../types";
 import { registerUser, loginUser } from "./actions";
 import { authHandler } from "./util";
@@ -52,9 +53,10 @@ const loginReducer = createSlice({
       authHandler(state, { loading: false })
     );
 
-    builder.addCase(loginUser.fulfilled, (state, { payload }) =>
-      authHandler(state, { authToken: payload })
-    );
+    builder.addCase(loginUser.fulfilled, (state, { payload }) => {
+      authHandler(state, { authToken: payload });
+      setAuthToken(payload);
+    });
 
     builder.addCase(loginUser.rejected, (state, { payload }) =>
       authHandler(state, { error: payload })

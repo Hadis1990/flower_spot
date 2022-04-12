@@ -1,9 +1,25 @@
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import { useAppSelector } from "../../state/hooks";
 
 import "./index.scss";
 
 export default () => {
+  const { authToken: registerAuthToken } = useAppSelector(
+    (state) => state.usersReducer.register
+  );
+  const { authToken: loginAuthToken } = useAppSelector(
+    (state) => state.usersReducer.login
+  );
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!registerAuthToken && !loginAuthToken) navigate("/");
+  }, []);
+
+  if (!registerAuthToken && !loginAuthToken) return null;
 
   return (
     <div id="congratulations">
