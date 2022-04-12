@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./index.scss";
 
@@ -7,7 +7,10 @@ export default () => {
 
   return (
     <div id="congratulations">
-      <h3>Congratulations! You have successfully signed up for FlowrSpot!</h3>
+      <div className="close">
+        <Link to="/">&#10006;</Link>
+      </div>
+      <h4>Congratulations! You have successfully signed up for FlowrSpot!</h4>
       <button onClick={() => navigate("/login")}>OK</button>
     </div>
   );

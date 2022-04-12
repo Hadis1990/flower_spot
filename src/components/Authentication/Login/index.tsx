@@ -29,7 +29,7 @@ export default () => {
   );
 
   useEffect(() => {
-    authToken && navigate("/");
+    authToken && navigate("/congratulations");
   }, [authToken]);
 
   useEffect(() => {
