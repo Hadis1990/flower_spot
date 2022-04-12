@@ -1,25 +1,35 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import profileImage from "../../assets/images/profile-holderprofile.png";
 
 import usersApi from "../../services/api/users";
+import { logout } from "../../state/users/reducer";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
 
 import "./index.scss";
 
 export default () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { authToken } = useAppSelector((state) => state.usersReducer.login);
+
   const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    const helperFunc = async () => {
-      const response = await usersApi.getUserDate();
-      setUserData(response.data.user);
-    };
+  // useEffect(() => {
+  //   const helperFunc = async () => {
+  //     const response = await usersApi.getUserDate();
+  //     setUserData(response.data.user);
+  //   };
 
-    try {
-      helperFunc();
-    } catch (error) {}
-  }, []);
+  //   try {
+  //     helperFunc();
+  //   } catch (error) {}
+  // }, []);
+
+  useEffect(() => {
+    if (!authToken) navigate("/login");
+  }, [authToken]);
 
   return (
     <div id="user-profile">
@@ -54,7 +64,7 @@ export default () => {
         </div>
       </div>
       <div className="logut-btn-container">
-        <button>Logout</button>
+        <button onClick={() => dispatch(logout())}>Logout</button>
       </div>
     </div>
   );

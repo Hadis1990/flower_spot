@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 
-import { setAuthToken } from "../../util";
+import { setAuthToken, removeAuthToken, getAuthToken } from "../../util";
 import { UserInitialState } from "../../types";
 import { registerUser, loginUser } from "./actions";
 import { authHandler } from "./util";
 
 const initialState = {
-  authToken: "",
+  authToken: getAuthToken(),
   loading: false,
   error: "",
 } as UserInitialState;
@@ -47,6 +47,16 @@ const loginReducer = createSlice({
         loading: false,
         error: "",
       }),
+
+    logout: (state) => {
+      state = authHandler(state, {
+        authToken: "",
+        loading: false,
+        error: "",
+      });
+      removeAuthToken();
+      return state;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state) =>
@@ -71,6 +81,6 @@ const usersReducer = combineReducers({
 });
 
 export const { registerCleanUp } = registerReducer.actions;
-export const { loginCleanUp } = loginReducer.actions;
+export const { logout, loginCleanUp } = loginReducer.actions;
 
 export default usersReducer;
