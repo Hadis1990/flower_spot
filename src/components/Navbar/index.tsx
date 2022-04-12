@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { isUserLoggedIn } from "../../util";
 import { useWindowWidth } from "../../util/hooks";
 
 import navbarLogo from "../../assets/images/cherry-blossom.png";
+import { useAppSelector, useAppDispatch } from "../../state/hooks";
+import { logout } from "../../state/users/reducer";
 
 import "./index.scss";
 
 export default () => {
+  const dispatch = useAppDispatch();
   const { windowWidth } = useWindowWidth();
   const [openMenu, setOpenMenu] = useState(windowWidth > 900);
-  const userLoggedIn = isUserLoggedIn();
+  const { authToken } = useAppSelector((state) => state.usersReducer.login);
 
   useEffect(() => {
     setOpenMenu(windowWidth > 900);
@@ -36,7 +38,7 @@ export default () => {
 
       {openMenu && (
         <div className="section-2">
-          {userLoggedIn && (
+          {authToken && (
             <>
               <Link to="/home" className="gray-font navbar-item">
                 Flowers
@@ -47,10 +49,16 @@ export default () => {
               <Link to="/favorites" className="gray-font navbar-item">
                 Favorites
               </Link>
+              <button
+                className="gray-font navbar-item logout-btn"
+                onClick={() => dispatch(logout())}
+              >
+                Logout
+              </button>
             </>
           )}
 
-          {!userLoggedIn && (
+          {!authToken && (
             <>
               <Link to="/login" className="pink-font navbar-item">
                 Login

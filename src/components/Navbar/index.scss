@@ -72,6 +72,14 @@
       border-radius: 1em;
     }
 
+    .logout-btn {
+      border: none;
+      background-color: #fff;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
     @media screen and (max-width: 900px) {
       display: block;
       width: 100%;
