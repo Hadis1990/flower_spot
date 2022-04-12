@@ -21,6 +21,22 @@
     cursor: pointer;
   }
 
+  .login-success-btns {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+
+    button {
+      display: inline-block;
+      width: 30%;
+      margin: 0px;
+    }
+
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+
   .close {
     position: absolute;
     top: 5px;

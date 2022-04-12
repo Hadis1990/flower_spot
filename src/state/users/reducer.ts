@@ -54,8 +54,9 @@ const loginReducer = createSlice({
     );
 
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
-      authHandler(state, { authToken: payload });
+      state = authHandler(state, { authToken: payload });
       setAuthToken(payload);
+      return state;
     });
 
     builder.addCase(loginUser.rejected, (state, { payload }) =>

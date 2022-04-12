@@ -27,7 +27,16 @@ export default () => {
         <Link to="/">&#10006;</Link>
       </div>
       <h4>Congratulations! You have successfully signed up for FlowrSpot!</h4>
-      <button onClick={() => navigate("/login")}>OK</button>
+      {registerAuthToken && !loginAuthToken && (
+        <button onClick={() => navigate("/login")}>OK</button>
+      )}
+
+      {loginAuthToken && (
+        <div className="login-success-btns">
+          <button onClick={() => navigate("/")}>OK</button>
+          <button onClick={() => navigate("/user_profile")}>Profile</button>
+        </div>
+      )}
     </div>
   );
 };

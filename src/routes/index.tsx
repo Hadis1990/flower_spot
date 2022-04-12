@@ -20,10 +20,12 @@ export default () => (
         path="/congratulations"
         element={<ModalHOC component={<Congratulations />} />}
       />
-    </Route>
-
-    <Route path="/user_profile" element={<PrivateRoute />}>
-      <Route path="/user_profile" element={<UserProfile />} />
+      <Route path="/user_profile" element={<PrivateRoute />}>
+        <Route
+          path="/user_profile"
+          element={<ModalHOC component={<UserProfile />} />}
+        />
+      </Route>
     </Route>
   </Routes>
 );

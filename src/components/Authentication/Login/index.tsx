@@ -28,6 +28,8 @@ export default () => {
     (state) => state.usersReducer.login
   );
 
+  console.log("authToken", authToken);
+
   useEffect(() => {
     authToken && navigate("/congratulations");
   }, [authToken]);
