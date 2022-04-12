@@ -57,6 +57,9 @@
   .section-2 {
     width: 80%;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 
     #ham-menu {
       display: none;
@@ -72,12 +75,23 @@
       border-radius: 1em;
     }
 
+    span,
+    button {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.9em;
+      color: #949ea0;
+    }
+
     .logout-btn {
       border: none;
       background-color: #fff;
-      font-family: "Montserrat", sans-serif;
-      font-size: 0.9em;
+      margin-left: 5px;
       cursor: pointer;
+    }
+
+    img {
+      width: 40px;
+      margin-left: 15px;
     }
 
     @media screen and (max-width: 900px) {

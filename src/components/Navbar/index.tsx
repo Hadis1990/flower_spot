@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useWindowWidth } from "../../util/hooks";
 
 import navbarLogo from "../../assets/images/cherry-blossom.png";
+import profilePicture from "../../assets/images/profile-holderprofile.png";
+
 import { useAppSelector, useAppDispatch } from "../../state/hooks";
 import { logout } from "../../state/users/reducer";
 
@@ -40,7 +42,7 @@ export default () => {
         <div className="section-2">
           {authToken && (
             <>
-              <Link to="/home" className="gray-font navbar-item">
+              {/* <Link to="/home" className="gray-font navbar-item">
                 Flowers
               </Link>
               <Link to="/latest_sightings" className="gray-font navbar-item">
@@ -48,13 +50,15 @@ export default () => {
               </Link>
               <Link to="/favorites" className="gray-font navbar-item">
                 Favorites
-              </Link>
+              </Link> */}
+              <span>John Doe</span>
               <button
                 className="gray-font navbar-item logout-btn"
                 onClick={() => dispatch(logout())}
               >
                 Logout
               </button>
+              <img src={profilePicture} />
             </>
           )}
 
