@@ -27,7 +27,11 @@ export default () => {
       {loading ? (
         <Loader />
       ) : (
-        <ImagesGrid images={flowers} cachedFlowers={cachedFlowers} />
+        <ImagesGrid
+          images={flowers}
+          cachedFlowers={cachedFlowers}
+          columns={5}
+        />
       )}
 
       <Outlet />

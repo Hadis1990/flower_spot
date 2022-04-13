@@ -68,7 +68,7 @@ export default () => {
             </div>
 
             <div className="input-fields-container">
-              <label htmlFor="password">password</label>
+              <label htmlFor="password">Password</label>
               <Field
                 id="password"
                 name="password"

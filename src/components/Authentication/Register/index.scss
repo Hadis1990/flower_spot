@@ -24,7 +24,7 @@
     .input-fields-container {
       background-color: #dfe5ea;
       margin-bottom: 10px;
-      padding: 10px;
+      padding: 1%;
 
       label {
         display: block;
@@ -33,7 +33,7 @@
 
       .input-fields {
         display: block;
-        width: 99%;
+        width: 100%;
         margin: 10px auto;
         padding: 10px 0px;
         border: navajowhite;
@@ -43,6 +43,15 @@
         margin: 5px 0px 0px 0px;
         padding: 0px;
       }
+    }
+
+    .first-last-name {
+      width: 47%;
+      display: inline-block;
+    }
+
+    .first-last-name:first-child {
+      margin-right: 2%;
     }
 
     .submit-button {
@@ -59,6 +68,21 @@
   .error {
     color: red;
     margin-top: 10px;
+  }
+
+  .first-last-name-error-container {
+    display: flex;
+    justify-content: space-between;
+
+    div:nth-child(2) {
+      width: 49%;
+    }
+  }
+
+  .error-msg {
+    margin: 0px 0px 10px 0px;
+    color: red;
+    display: inline-block;
   }
 
   @media screen and (max-width: 900px) {

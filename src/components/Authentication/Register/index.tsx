@@ -60,23 +60,27 @@ export default () => {
       >
         {({ errors, touched }) => (
           <Form id="register-form">
-            <div className="input-fields-container">
+            <div className="input-fields-container first-last-name">
               <label htmlFor="first_name">First Name</label>
               <Field
                 id="first_name"
                 name="first_name"
                 className="input-fields"
               />
-              {errors.first_name && touched.first_name ? (
-                <div>{errors.first_name}</div>
-              ) : null}
             </div>
 
-            <div className="input-fields-container">
+            <div className="input-fields-container first-last-name">
               <label htmlFor="last_name">Last Name</label>
               <Field id="last_name" name="last_name" className="input-fields" />
-              {errors.last_name && touched.last_name ? (
-                <div>{errors.last_name}</div>
+            </div>
+
+            <div className="first-last-name-error-container">
+              {errors.first_name && touched.first_name ? (
+                <div className="error-msg">{errors.first_name}</div>
+              ) : null}
+
+              {errors.first_name && touched.first_name ? (
+                <div className="error-msg">{errors.first_name}</div>
               ) : null}
             </div>
 
@@ -99,21 +103,24 @@ export default () => {
                 type="email"
                 className="input-fields"
               />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
             </div>
+            {errors.email && touched.email ? (
+              <div className="error-msg">{errors.email}</div>
+            ) : null}
 
             <div className="input-fields-container">
-              <label htmlFor="password">password</label>
+              <label htmlFor="password">Password</label>
               <Field
                 id="password"
                 name="password"
                 type="password"
                 className="input-fields"
               />
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
             </div>
+
+            {errors.password && touched.password ? (
+              <div className="error-msg">{errors.password}</div>
+            ) : null}
 
             <button
               type="submit"
