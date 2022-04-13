@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-import { Wallpaper, ImagesGrid } from "../../components";
+import { Wallpaper, ImagesGrid, Loader } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
   getListOfRandomFlowers,
@@ -10,8 +10,8 @@ import {
 
 export default () => {
   const dispatch = useAppDispatch();
-  const flowers = useAppSelector((state) => state.flowersReducer.flowers);
-  const cacheFlowers = [...flowers];
+  const { flowers, loading } = useAppSelector((state) => state.flowersReducer);
+  const cachedFlowers = [...flowers];
 
   useEffect(() => {
     dispatch(getListOfRandomFlowers());
@@ -24,7 +24,12 @@ export default () => {
   return (
     <div>
       <Wallpaper searchFlowers={searchFlowers} />
-      <ImagesGrid images={flowers || cacheFlowers} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <ImagesGrid images={flowers} cachedFlowers={cachedFlowers} />
+      )}
+
       <Outlet />
     </div>
   );

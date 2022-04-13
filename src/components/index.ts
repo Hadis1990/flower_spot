@@ -6,3 +6,4 @@ export { default as ImagesGrid } from "./ImagesGrid";
 export { default as Congratulations } from "./Congratulations";
 export { default as UserProfile } from "./UserProfile";
 export { default as ModalHOC } from "./ModalHOC";
+export { default as Loader } from "./Loader";

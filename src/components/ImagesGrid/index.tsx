@@ -6,14 +6,18 @@ import "./index.scss";
 
 type Props = {
   images: Flower[];
+  cachedFlowers: Flower[];
 };
 
-export default ({ images }: Props) => {
+export default ({ images, cachedFlowers }: Props) => {
   const { authToken } = useAppSelector((state) => state.usersReducer.login);
+
+  const imagesToDisplay = images.length ? images : cachedFlowers;
 
   return (
     <div id="images-grid" className="ubuntu-font-family">
-      {images.map((img) => (
+      {!images.length && <h3>No images Found...</h3>}
+      {imagesToDisplay.map((img) => (
         <div
           className="img-container"
           style={{ backgroundImage: `url(${img.profile_picture})` }}

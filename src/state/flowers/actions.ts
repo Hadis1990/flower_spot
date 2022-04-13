@@ -26,7 +26,6 @@ export const getListOfSearchedFlowers = createAsyncThunk<
 >("flowers/getListOfSearchedFlowers", async (query, thunkApi) => {
   try {
     const response = await flowersApi.getListOfSearchedFlowers(query);
-    console.log(response);
     return response.data.flowers;
   } catch (error: any) {
     return thunkApi.rejectWithValue(
