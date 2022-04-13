@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { FlowerInitialState } from "../../types";
-import { getListOfRandomFlowers } from "./actions";
+import { getListOfRandomFlowers, getListOfSearchedFlowers } from "./actions";
 import { flowersStateHandler } from "./util";
 
 const initialState = {
@@ -24,6 +24,18 @@ const flowersReducer = createSlice({
     );
 
     builder.addCase(getListOfRandomFlowers.rejected, (state, { payload }) =>
+      flowersStateHandler(state, { error: payload })
+    );
+
+    builder.addCase(getListOfSearchedFlowers.pending, (state) =>
+      flowersStateHandler(state, { loading: false })
+    );
+
+    builder.addCase(getListOfSearchedFlowers.fulfilled, (state, { payload }) =>
+      flowersStateHandler(state, { flowers: payload })
+    );
+
+    builder.addCase(getListOfSearchedFlowers.rejected, (state, { payload }) =>
       flowersStateHandler(state, { error: payload })
     );
   },

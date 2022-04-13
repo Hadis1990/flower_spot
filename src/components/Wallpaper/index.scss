@@ -7,5 +7,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-bottom: 3px;
+
+  .search-container {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px 10px;
+    margin: 10px auto;
+
+    input {
+      border: none;
+      outline: none;
+      font-size: 1em;
+
+      ::placeholder {
+        color: #949ea0;
+        font-size: 1em;
+      }
+    }
+  }
 }

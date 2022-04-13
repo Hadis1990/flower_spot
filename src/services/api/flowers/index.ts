@@ -10,11 +10,11 @@ export default {
 
   getFlowerDetail: (id: number) => apiFlowers({ url: `/${id}/` }),
 
-  getFlowersSearch: (query: string) => {
+  getListOfSearchedFlowers: (query: string) => {
     const params = new URLSearchParams();
-    params.append("query", query);
+    params.append("search", query);
 
-    return apiFlowers({ url: "search", params });
+    return apiFlowers({ url: "", params });
   },
 
   addFlower: (flower: Flower) =>

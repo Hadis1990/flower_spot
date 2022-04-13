@@ -18,3 +18,19 @@ export const getListOfRandomFlowers = createAsyncThunk<
     );
   }
 });
+
+export const getListOfSearchedFlowers = createAsyncThunk<
+  Flower[],
+  string,
+  { rejectValue: string }
+>("flowers/getListOfSearchedFlowers", async (query, thunkApi) => {
+  try {
+    const response = await flowersApi.getListOfSearchedFlowers(query);
+    console.log(response);
+    return response.data.flowers;
+  } catch (error: any) {
+    return thunkApi.rejectWithValue(
+      error?.response?.data?.error || "Something went wrong..."
+    );
+  }
+});
