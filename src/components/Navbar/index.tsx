@@ -7,7 +7,7 @@ import navbarLogo from "../../assets/images/cherry-blossom.png";
 import profilePicture from "../../assets/images/profile-holderprofile.png";
 
 import { useAppSelector, useAppDispatch } from "../../state/hooks";
-import { logout } from "../../state/users/reducer";
+import { logout, registerCleanUp } from "../../state/users/reducer";
 
 import "./index.scss";
 
@@ -54,7 +54,10 @@ export default () => {
               <span>John Doe</span>
               <button
                 className="gray-font navbar-item logout-btn"
-                onClick={() => dispatch(logout())}
+                onClick={() => {
+                  dispatch(logout());
+                  dispatch(registerCleanUp());
+                }}
               >
                 Logout
               </button>

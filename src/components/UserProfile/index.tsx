@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 import profileImage from "../../assets/images/profile-holderprofile.png";
 
 import usersApi from "../../services/api/users";
-import { logout } from "../../state/users/reducer";
+import { logout, registerCleanUp } from "../../state/users/reducer";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 
 import "./index.scss";
@@ -68,7 +68,14 @@ export default () => {
         </div>
       </div>
       <div className="logut-btn-container">
-        <button onClick={() => dispatch(logout())}>Logout</button>
+        <button
+          onClick={() => {
+            dispatch(logout());
+            dispatch(registerCleanUp());
+          }}
+        >
+          Logout
+        </button>
       </div>
     </div>
   );
