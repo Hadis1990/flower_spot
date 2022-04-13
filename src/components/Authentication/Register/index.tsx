@@ -34,6 +34,7 @@ export default () => {
   );
 
   const [birthDay, setbirthDay] = useState<Date>();
+  const [missingBirthday, setMissingBirthday] = useState(false);
 
   useEffect(() => {
     authToken && navigate("/congratulations");
@@ -92,8 +93,15 @@ export default () => {
                 className="input-fields"
                 selected={birthDay}
                 onChange={(date: Date) => setbirthDay(date)}
+                onBlur={() => {
+                  if (!birthDay) setMissingBirthday(true);
+                }}
+                onFocus={() => setMissingBirthday(false)}
               />
             </div>
+            {missingBirthday ? (
+              <div className="error-msg">{"Required!"}</div>
+            ) : null}
 
             <div className="input-fields-container">
               <label htmlFor="email">Email</label>
