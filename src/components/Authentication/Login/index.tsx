@@ -64,8 +64,10 @@ export default () => {
                 type="email"
                 className="input-fields"
               />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
             </div>
+            {errors.email && touched.email ? (
+              <div className="error-msg">{errors.email}</div>
+            ) : null}
 
             <div className="input-fields-container">
               <label htmlFor="password">Password</label>
@@ -75,10 +77,11 @@ export default () => {
                 type="password"
                 className="input-fields"
               />
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
             </div>
+
+            {errors.password && touched.password ? (
+              <div className="error-msg">{errors.password}</div>
+            ) : null}
 
             <button
               type="submit"
