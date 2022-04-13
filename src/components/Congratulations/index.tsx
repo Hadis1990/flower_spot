@@ -21,6 +21,8 @@ export default () => {
 
   if (!registerAuthToken && !loginAuthToken) return null;
 
+  console.log(registerAuthToken);
+
   return (
     <div id="congratulations">
       <div className="close">

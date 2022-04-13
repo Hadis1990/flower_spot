@@ -8,5 +8,9 @@ export default {
   loginUser: (user: Pick<User, "email" | "password">) =>
     apiUsers({ url: "login", method: "POST", data: user }),
 
-  getUserDate: () => apiUsers({ url: `me` }),
+  getUserDate: (id: number) =>
+    apiUsers({
+      url: `${id}`,
+      data: { auth_token: localStorage.getItem("authToken") },
+    }),
 };

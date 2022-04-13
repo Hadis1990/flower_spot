@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 import profileImage from "../../assets/images/profile-holderprofile.png";
 
@@ -14,18 +15,21 @@ export default () => {
   const dispatch = useAppDispatch();
   const { authToken } = useAppSelector((state) => state.usersReducer.login);
 
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({ first_name: "", last_name: "" });
 
-  // useEffect(() => {
-  //   const helperFunc = async () => {
-  //     const response = await usersApi.getUserDate();
-  //     setUserData(response.data.user);
-  //   };
+  useEffect(() => {
+    const decodedAuthToken: { user_id: number } = jwt_decode(authToken);
+    console.log(decodedAuthToken);
+    const helperFunc = async () => {
+      const response = await usersApi.getUserDate(decodedAuthToken.user_id);
+      console.log(response);
+      setUserData(response.data.user);
+    };
 
-  //   try {
-  //     helperFunc();
-  //   } catch (error) {}
-  // }, []);
+    try {
+      helperFunc();
+    } catch (error) {}
+  }, []);
 
   useEffect(() => {
     if (!authToken) navigate("/login");
@@ -41,18 +45,18 @@ export default () => {
           <img src={profileImage} />
         </div>
         <div>
-          <div>John Doe</div>
+          <div>{`${userData.first_name} ${userData.last_name}`}</div>
           <div>17 sightings</div>
         </div>
       </div>
       <div className="section-2">
         <div>
           <label>First Name</label>
-          <div>John</div>
+          <div>{userData.first_name}</div>
         </div>
         <div>
           <label>Last Name</label>
-          <div>Doe</div>
+          <div>{userData.last_name}</div>
         </div>
         <div>
           <label>Date of Birth</label>
